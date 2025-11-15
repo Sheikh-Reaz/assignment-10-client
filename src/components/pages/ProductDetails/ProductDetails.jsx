@@ -43,6 +43,7 @@ const ProductDetails = () => {
         product_name: product.product_name,
         product_image: product.product_image,
         price: product.price,
+        discount_price:product.discount_price,
         origin_country: product.origin_country,
         rating: product.rating,
         imported_quantity: importQty,

@@ -39,7 +39,8 @@ const MyImport = () => {
   }
 
   return (
-    <div className="px-4">
+    <div className="max-w-7xl mx-auto md:p-4" >
+                <div className="pt-16 px-4">
       <h1 className="text-center text-2xl text-color font-bold mb-6">
         My Imports
       </h1>
@@ -49,46 +50,46 @@ const MyImport = () => {
           You haven’t imported anything yet.
         </h2>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6 p-2">
           {imports.map((product) => (
             <div key={product._id} className="relative">
 
-              <div className="card bg-base-100 shadow-sm border rounded-xl overflow-hidden">
-
-                {/* Image */}
+              <div className="card bg-base-100 shadow-sm">
+                {/* Product Image */}
                 <figure>
                   <img
                     src={product.product_image}
                     alt={product.product_name}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-90 object-cover"
                   />
                 </figure>
 
                 <div className="card-body">
                   {/* Product Name */}
-                  <h2 className="card-title text-lg">
-                    {product.product_name}
-                  </h2>
+                  <h2 className="card-title">{product.product_name}</h2>
 
-                  {/* Rating & Origin */}
-                  <div className="flex items-center justify-between mt-2">
+                  {/* Rating and Origin */}
+                  <div className="flex items-center justify-between my-2">
                     <div className="flex items-center gap-1 text-yellow-400 font-semibold">
                       <FaStar />
                       <span className="text-gray-700">{product.rating}</span>
                     </div>
-                    <p className="text-gray-500 text-sm">
+
+                    <div className="text-gray-500 text-sm">
                       <span className="font-semibold">Origin:</span>{" "}
                       {product.origin_country}
-                    </p>
+                    </div>
                   </div>
 
-                  {/* Price */}
-                  <p className="text-blue-600 font-bold text-lg mt-2">
-                    ${product.price}
-                  </p>
+                  {/* Pricing */}
+                  <div className="flex items-center gap-3 my-2">
+                    <span className="text-blue-600 font-bold text-lg">
+                      ${product.discount_price}
+                    </span>
+                  </div>
 
                   {/* Imported Quantity */}
-                  <p className="text-gray-700 mt-1 font-medium">
+                  <p className="text-gray-700 font-medium">
                     Imported Quantity:{" "}
                     <span className="font-semibold">
                       {product.imported_quantity}
@@ -96,7 +97,7 @@ const MyImport = () => {
                   </p>
 
                   {/* Buttons */}
-                  <div className="card-actions flex flex-col gap-2 mt-4">
+                  <div className="card-actions mt-4 flex flex-col gap-2">
                     <button
                       onClick={() => handleRemove(product._id)}
                       className="btn btn-error w-full"
@@ -104,7 +105,6 @@ const MyImport = () => {
                       Remove
                     </button>
 
-                    {/* NO react-router-dom → using normal <a> */}
                     <a
                       href={`/productDetails/${product._id}`}
                       className="btn btn-primary w-full"
@@ -112,15 +112,17 @@ const MyImport = () => {
                       See Details
                     </a>
                   </div>
-
                 </div>
 
               </div>
+
             </div>
           ))}
         </div>
       )}
     </div>
+    </div>
+
   );
 };
 
