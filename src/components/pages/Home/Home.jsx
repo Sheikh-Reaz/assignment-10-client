@@ -127,10 +127,10 @@ const Home = () => {
           {topCountries.map((country) => (
             <div
               key={country.name}
-              className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center text-center"
+              className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center text-black text-center"
             >
               <div className="text-4xl mb-2">{country.flag}</div>
-              <h2 className="font-semibold text-lg">{country.name}</h2>
+              <h2 className="font-semibold text-black text-lg">{country.name}</h2>
               <p className="text-gray-500">{country.exportVolume}</p>
             </div>
           ))}
