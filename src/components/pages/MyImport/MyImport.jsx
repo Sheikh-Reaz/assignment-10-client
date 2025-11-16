@@ -36,14 +36,14 @@ const MyImport = () => {
 
   if (loading || authLoading) {
     return (
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center min-h-screen mt-20">
         <span className="loading loading-spinner text-primary"></span>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto md:p-4">
+    <div className="max-w-7xl mx-auto min-h-screen md:p-4">
       <Helmet>
         <title>My Imports</title>
       </Helmet>

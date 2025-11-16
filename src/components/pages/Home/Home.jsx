@@ -38,7 +38,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto md:p-4">
+    <div className="max-w-7xl mx-auto min-h-screen md:p-4">
       <Helmet>
         <title>Home</title>
       </Helmet>

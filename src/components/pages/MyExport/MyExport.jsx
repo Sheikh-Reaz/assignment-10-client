@@ -4,7 +4,7 @@ import { AuthContext } from "../../../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 
 const MyExport = () => {
- const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const axios = useAxios();
   const [exports, setExports] = useState([]);
   const [modalData, setModalData] = useState(null);
@@ -17,7 +17,7 @@ const MyExport = () => {
 
   useEffect(() => {
     fetchExports();
-  });
+  }, [user]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product?")) return;
@@ -44,53 +44,60 @@ const MyExport = () => {
   };
 
   return (
-<div className="max-w-7xl mx-auto md:p-4" >
-                        <Helmet>
-                  <title>My Exports</title>
-                </Helmet>
-        <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {exports.map((product) => (
-        <div key={product._id} className="card bg-base-100 shadow-xl p-4">
-          <img
-            src={product.product_image}
-            alt={product.product_name}
-            className="w-full h-40 object-cover"
-          />
-          <h2 className="font-bold text-xl mt-2">{product.product_name}</h2>
-          <p>Price: ${product.price}</p>
-          <p>Discount Price: ${product.discount_price}</p>
-          <p>Origin: {product.origin_country}</p>
-          <p>Rating: {product.rating}</p>
-          <p>Available Quantity: {product.available_quantity}</p>
-          
-          <div className="flex gap-2 mt-2">
-            <button
-              onClick={() => handleDelete(product._id)}
-              className="btn btn-sm btn-error"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => handleUpdate(product)}
-              className="btn btn-sm btn-primary"
-            >
-              Update
-            </button>
+    <div className="max-w-7xl mx-auto min-h-screen md:p-4">
+      <Helmet>
+        <title>My Exports</title>
+      </Helmet>
+
+      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {exports.map((product) => (
+          <div key={product._id} className="card bg-base-100 shadow-xl p-4">
+            <img
+              src={product.product_image}
+              alt={product.product_name}
+              className="w-full h-40 object-cover"
+            />
+            <h2 className="font-bold text-xl mt-2">{product.product_name}</h2>
+            <p>Price: ${product.price}</p>
+            <p>Discount Price: ${product.discount_price}</p>
+            <p>Origin: {product.origin_country}</p>
+            <p>Rating: {product.rating}</p>
+            <p>Available Quantity: {product.available_quantity}</p>
+
+            <div className="flex gap-2 mt-2">
+              <button
+                onClick={() => handleDelete(product._id)}
+                className="btn btn-sm btn-error"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => handleUpdate(product)}
+                className="btn btn-sm btn-primary"
+              >
+                Update
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Modal */}
       {modalData && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-4 rounded w-96 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-xl font-bold mb-2">Update Product</h3>
-            <form onSubmit={handleModalSubmit} className="space-y-2">
+        <dialog
+          open
+          className="modal modal-bottom sm:modal-middle"
+          onClose={() => setModalData(null)}
+        >
+          <div className="modal-box w-full max-w-md max-h-[90vh] overflow-y-auto p-6">
+            <h3 className="font-bold text-lg mb-4">Update Product</h3>
+            <form onSubmit={handleModalSubmit} className="space-y-3">
               <input
                 name="product_name"
                 value={modalData.product_name}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Product Name"
                 required
               />
               <input
@@ -98,6 +105,7 @@ const MyExport = () => {
                 value={modalData.product_image}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Product Image URL"
                 required
               />
               <input
@@ -106,6 +114,7 @@ const MyExport = () => {
                 value={modalData.price}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Price"
                 required
               />
               <input
@@ -114,12 +123,14 @@ const MyExport = () => {
                 value={modalData.discount_price}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Discount Price"
               />
               <input
                 name="origin_country"
                 value={modalData.origin_country}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Origin Country"
                 required
               />
               <input
@@ -129,6 +140,7 @@ const MyExport = () => {
                 value={modalData.rating}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Rating"
                 required
               />
               <input
@@ -137,6 +149,7 @@ const MyExport = () => {
                 value={modalData.available_quantity}
                 onChange={handleModalChange}
                 className="input input-bordered w-full"
+                placeholder="Available Quantity"
                 required
               />
               <textarea
@@ -144,9 +157,11 @@ const MyExport = () => {
                 value={modalData.product_description}
                 onChange={handleModalChange}
                 className="textarea textarea-bordered w-full"
+                placeholder="Product Description"
                 required
               />
-              <div className="flex justify-end gap-2 mt-2">
+
+              <div className="modal-action justify-end gap-2 mt-3">
                 <button
                   type="button"
                   onClick={() => setModalData(null)}
@@ -160,10 +175,9 @@ const MyExport = () => {
               </div>
             </form>
           </div>
-        </div>
+        </dialog>
       )}
     </div>
-</div>
   );
 };
 

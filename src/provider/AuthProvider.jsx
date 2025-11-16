@@ -11,6 +11,7 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import Loading from "../components/Loading";
 // import Loading from "../components/Loading";
 //-------------------import Zone----------//
 
@@ -118,6 +119,9 @@ const authData ={
 //   return <Loading></Loading>
 // }
 //Context Provider 
+if(loading){
+  return <Loading></Loading>
+}
   return <AuthContext value={authData}>{children}</AuthContext>;
 };
 

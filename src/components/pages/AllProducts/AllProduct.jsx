@@ -31,7 +31,7 @@ const AllProduct = () => {
 
   return (
 
-    <div className="max-w-7xl mx-auto md:p-4">
+    <div className="max-w-7xl mx-auto md:p-4 min-h-screen">
                 <Helmet>
             <title>All Products</title>
           </Helmet>

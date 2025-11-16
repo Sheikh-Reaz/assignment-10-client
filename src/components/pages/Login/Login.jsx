@@ -66,7 +66,7 @@ const Login = () => {
   };
 
   return (
-    <div className="text-color">
+    <div className="text-color min-h-screen ">
       <Helmet>
         <title>Login</title>
       </Helmet>
